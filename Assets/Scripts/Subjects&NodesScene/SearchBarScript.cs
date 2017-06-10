@@ -7,7 +7,7 @@ public class SearchBarScript : MonoBehaviour {
 
 
 	public InputField mainInputField;
-	public GameObject scrollListController;
+	public GameObject nodesScrollListController;
 	// Use this for initialization
 	void Start () {
 
@@ -21,6 +21,26 @@ public class SearchBarScript : MonoBehaviour {
 
 	public void ValueChangeCheck()
 	{
-		
+		NodesScrollList createScrollList = nodesScrollListController.GetComponent<NodesScrollList>();
+		createScrollList.clearNodeList();
+		List<Node> selectedNodesList = new List<Node>();
+		foreach (Node n in SelectedNodesClass.SelectedNodes)
+		{
+			if (n.name.Contains(mainInputField.text))
+			{
+				selectedNodesList.Add(n);
+			}
+		}
+		createScrollList.nodeList = selectedNodesList;
+		if (selectedNodesList.Count > 0)
+		{
+			createScrollList.populateNodeList();
+		}
+		else
+		{
+			createScrollList.clearNodeList();
+			Debug.Log("Search bar : Nema cvorova za prikaz");
+
+		}
 	}
 }

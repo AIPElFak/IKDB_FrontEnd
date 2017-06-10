@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿	using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -7,7 +7,7 @@ public class NodesScrollList : MonoBehaviour {
 
 	public Transform nodeContentPanel;
 	public GameObject sampleNodeButton;
-	public List<Node> nodeList;
+	public  List<Node> nodeList;
 	// Use this for initialization
 	void Start () {
 		
@@ -20,6 +20,7 @@ public class NodesScrollList : MonoBehaviour {
 
 	public void populateNodeList()
 	{
+		this.nodeList = SelectedNodesClass.SelectedNodes;
 		if (nodeList != null)
 		{
 			foreach (Node n in nodeList)

@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class SearchByCategoriesScript : MonoBehaviour {
 
-	public List<Node> nodes;
+	public static List<Node> nodes;
 	GetNodesServerRequestScript getNodesServerRequestScript;
+	public GameObject nodesScrollListController;
+	public GameObject serverRequester;
 	// Use this for initialization
 	void Start () {
 		
@@ -21,6 +23,7 @@ public class SearchByCategoriesScript : MonoBehaviour {
 	public void onClickSearch()
 	{
 		// Debug.Log("Click");
+		getNodesServerRequestScript = serverRequester.GetComponent<GetNodesServerRequestScript>();
 		getNodesServerRequestScript.categoriesNodeRequest(SelectedSubjectsClass.SelectedSubjects, clickCallback);
 
 	//	createScrollList.clearNodeList();
@@ -29,15 +32,17 @@ public class SearchByCategoriesScript : MonoBehaviour {
 
 	public void clickCallback(List<Node> array)
 	{
-		nodes = array;
+		//nodes = array;
+		SelectedNodesClass.SelectedNodes = array;
+
 		if(array==null)
 		{
 			Debug.Log("Nema cvorova za prikaz");
 			return;
 		}
-		//CreateScrollList createScrollList = scrollListController.GetComponent<CreateScrollList>();
+		NodesScrollList createScrollList = nodesScrollListController.GetComponent<NodesScrollList>();
 
-//		createScrollList.nodeList = array;
-//		createScrollList.populateNodeList();
+		createScrollList.nodeList = array;
+		createScrollList.populateNodeList();
 	}
 }

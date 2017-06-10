@@ -7,20 +7,9 @@ using UnityEngine.UI;
 using LitJson;
 using UnityEditor;
 
-public class GetNodesServerRequestScript : MonoBehaviour {
+public class GetNodesServerRequestScript : MonoBehaviour  {
 
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	public void categoriesNodeRequest(List<string> categories, Action<List<Node>> categoriesCallback)
+	public  void categoriesNodeRequest(List<string> categories, Action<List<Node>> categoriesCallback)
 	{
 		if (categories.Count != 0)
 		{
@@ -45,7 +34,7 @@ public class GetNodesServerRequestScript : MonoBehaviour {
 		}
 	}
 
-	IEnumerator waitForCategoriesNodeResponse(WWW www,Action<List<Node>> categoriesCallback)
+	 IEnumerator waitForCategoriesNodeResponse(WWW www,Action<List<Node>> categoriesCallback)
 	{
 		yield return www;
 

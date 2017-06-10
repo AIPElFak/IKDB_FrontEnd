@@ -30,4 +30,23 @@ public static class DataHandler  {
 	
 	}
 
+	private static Node selectedNode;
+	public static Node SelctedNode {
+		get {
+			return selectedNode;
+		}
+		set {
+			selectedNode = value;
+		}
+	}
+	private static NodeRelationshipDataSet selectedNrds;
+	public static NodeRelationshipDataSet SelectedNrds {
+		get {
+			return selectedNrds;
+		}
+		set {
+			selectedNrds = value;
+		}
+	}
+
 }
