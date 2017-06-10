@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoginButtonScript : MonoBehaviour {
 
@@ -27,16 +28,10 @@ public class LoginButtonScript : MonoBehaviour {
 
 	public void startSubjectsPanel(string[] subjects)
 	{
-		//Debug.Log(subjects);
-		//Debug.Log("Sada se otvara novi panel");
-	//	CreateScrollList scrollListScript = scrollListController.GetComponent<CreateScrollList>();
-	//	scrollListScript.subjectList = subjects;
-	//	scrollListScript.PopulateList();
-		// loginPanel = GameObject.Find("PanelLogin");
-		// loginPanel.gameObject.SetActive(false);
-
-		//   subjectsPanel = GameObject.Find("SubjectsPanel");
 		DataHandler.Subjects=subjects;
+
+		//nova scena se tu otvara
+		SceneManager.LoadScene(1);
 
 	}
 

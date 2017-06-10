@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using LitJson;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class GetNodesServerRequestScript : MonoBehaviour  {
 
@@ -49,7 +51,8 @@ public class GetNodesServerRequestScript : MonoBehaviour  {
 		else
 		{
 
-			EditorUtility.DisplayDialog("An error occured", www.text, "Ok");
+//			EditorUtility.DisplayDialog("An error occured", www.text, "Ok");
+			Debug.Log(www.text);
 
 		}
 	}

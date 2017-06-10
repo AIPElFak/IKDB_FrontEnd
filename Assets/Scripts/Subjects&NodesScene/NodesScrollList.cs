@@ -1,7 +1,9 @@
-﻿	using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class NodesScrollList : MonoBehaviour {
 
@@ -34,7 +36,8 @@ public class NodesScrollList : MonoBehaviour {
 		}
 		else
 		{
-			EditorUtility.DisplayDialog("No nodes ", "No nodes match selected subject(s)", "Ok");
+//			EditorUtility.DisplayDialog("No nodes ", "No nodes match selected subject(s)", "Ok");
+			Debug.Log("No nodes match selected subject(s)");
 		}
 	}
 

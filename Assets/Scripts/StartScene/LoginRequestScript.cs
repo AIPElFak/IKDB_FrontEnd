@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using LitJson;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class LoginRequestScript : MonoBehaviour {
 
@@ -52,7 +54,9 @@ public class LoginRequestScript : MonoBehaviour {
 		else
 		{
 
-			EditorUtility.DisplayDialog("An error occured", www.text, "Ok");
+//			EditorUtility.DisplayDialog("An error occured", www.text, "Ok");
+			Debug.Log("Login error");
+			Debug.Log (www.text);
 
 		}
 	}
