@@ -8,6 +8,7 @@ public class SearchByCategoriesScript : MonoBehaviour {
 	GetNodesServerRequestScript getNodesServerRequestScript;
 	public GameObject nodesScrollListController;
 	public GameObject serverRequester;
+	public GameObject panelHolder;
 	// Use this for initialization
 	void Start () {
 		
@@ -40,6 +41,7 @@ public class SearchByCategoriesScript : MonoBehaviour {
 			Debug.Log("Nema cvorova za prikaz");
 			return;
 		}
+		panelHolder.GetComponent<PanelHolderScript2> ().nodesPanel.SetActive (true);
 		NodesScrollList createScrollList = nodesScrollListController.GetComponent<NodesScrollList>();
 
 		createScrollList.nodeList = array;
