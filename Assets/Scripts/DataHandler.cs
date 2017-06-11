@@ -60,4 +60,13 @@ public static class DataHandler  {
 		}
 	}
 
+	private static Relationship selectedRelationship;
+	public static Relationship SelectedRelationship {
+		get {
+			return selectedRelationship;
+		}
+		set {
+			selectedRelationship = value;
+		}
+	}
 }

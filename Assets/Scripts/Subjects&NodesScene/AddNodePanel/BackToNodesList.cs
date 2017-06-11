@@ -1,14 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PanelHolderScript2 : MonoBehaviour {
+public class BackToNodesList : MonoBehaviour {
 
-	public GameObject addNodePanel;
-	public GameObject nodesPanel;
-	public GameObject subjectsPanel;
-
+	public GameObject panelHolder;
 	// Use this for initialization
 	void Start () {
 		
@@ -19,5 +15,7 @@ public class PanelHolderScript2 : MonoBehaviour {
 		
 	}
 
-
+	public void onClick() {
+		panelHolder.GetComponent<PanelHolderScript2> ().addNodePanel.SetActive (false);
+	}
 }
