@@ -69,4 +69,14 @@ public static class DataHandler  {
 			selectedRelationship = value;
 		}
 	}
+
+	private static List<Node> allNodes;
+	public static List<Node> AllNodes {
+		get { 
+			return allNodes;
+		}
+		set {
+			allNodes = value;
+		}
+	}
 }

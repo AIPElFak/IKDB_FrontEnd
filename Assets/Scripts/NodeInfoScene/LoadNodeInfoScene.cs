@@ -12,6 +12,7 @@ public class LoadNodeInfoScene : MonoBehaviour {
 	public GameObject votesAgainstNodeLabel;
 	public GameObject types;
 	private Node node;
+	public GameObject panelHolder;
 
 	// Use this for initialization
 	void Start() {
@@ -33,6 +34,8 @@ public class LoadNodeInfoScene : MonoBehaviour {
 		Dropdown typesDropdown = types.GetComponent<Dropdown>();
 		typesDropdown.ClearOptions();
 		typesDropdown.AddOptions(node.labels);
+		panelHolder.GetComponent<NodeInfoPanelHolderScript> ().nodeInfoPanel.SetActive (true);
+		panelHolder.GetComponent<NodeInfoPanelHolderScript> ().addRelationshipPanel.SetActive (false);
 
 		//CreateScrollList createSL = scrollListController.GetComponent<CreateScrollList>();
 		//createSL.relationshipsList = relatioships;
