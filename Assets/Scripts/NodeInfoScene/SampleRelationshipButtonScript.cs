@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using LitJson;
+using UnityEngine.SceneManagement;
 
 public class SampleRelationshipButtonScript : MonoBehaviour {
 	
@@ -39,6 +40,8 @@ public class SampleRelationshipButtonScript : MonoBehaviour {
 	public void onClickCallBack(Relationship r)
 	{
 		//nova scena se otvori (ili panel)
+		DataHandler.SelectedRelationship = r;
+		SceneManager.LoadScene("RelationshipInfoScene");
 	}
 	public void relationshipInformationRequest(int _id, Action<Relationship> relationshipInfoCallback)
 	{
