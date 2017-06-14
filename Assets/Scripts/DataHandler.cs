@@ -80,5 +80,42 @@ public static class DataHandler  {
 		}
 	}
 
+	private static List<LinkSuggestion> allLinkSuggestions;
+	public static List<LinkSuggestion> AllLinkSuggestions {
+		get { 
+			return allLinkSuggestions;
+		}
+		set {
+			allLinkSuggestions = value;
+		}
+	}
+	private static LinkSuggestion selectedLinkSuggestion;
+	public static LinkSuggestion SelectedLinkSuggestion {
+		get { 
+			return selectedLinkSuggestion;
+		}
+		set {
+			selectedLinkSuggestion = value;
+		}
+	}
+	private static List<NodeSuggestion> allNodeSuggestions;
+	public static List<NodeSuggestion> AllNodeSuggestions {
+		get { 
+			return allNodeSuggestions;
+		}
+		set {
+			allNodeSuggestions = value;
+		}
+	}
+	private static NodeSuggestion selectedNodeSuggestion;
+	public static NodeSuggestion SelectedNodeSuggestion {
+		get { 
+			return selectedNodeSuggestion;
+		}
+		set {
+			selectedNodeSuggestion = value;
+		}
+	}
+
 
 }
