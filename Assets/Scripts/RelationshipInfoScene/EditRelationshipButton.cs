@@ -7,12 +7,13 @@ public class EditRelationshipButton : MonoBehaviour {
 
 	public InputField inputFieldRelationshipDescription;
 	public Button sendSuggestion;
+	public Button backToRelationshipInfo;
 
 	// Use this for initialization
 	void Start () {
 		inputFieldRelationshipDescription.gameObject.SetActive (false);
 		sendSuggestion.gameObject.SetActive (false);
-		
+		backToRelationshipInfo.gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -23,5 +24,6 @@ public class EditRelationshipButton : MonoBehaviour {
 	public void click() {
 		inputFieldRelationshipDescription.gameObject.SetActive (true);
 		sendSuggestion.gameObject.SetActive (true);
+		backToRelationshipInfo.gameObject.SetActive (true);
 	}
 }

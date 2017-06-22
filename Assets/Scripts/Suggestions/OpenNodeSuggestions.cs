@@ -9,6 +9,7 @@ public class OpenNodeSuggestions : MonoBehaviour {
 	public GameObject listControler;
 	NodeSuggestionsList nodeSuggestionListScript;
 	public GameObject panelHolder;
+	SuggestionsScenePanelHolderScript phs;
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +37,7 @@ public class OpenNodeSuggestions : MonoBehaviour {
 		nodeSuggestionListScript = listControler.GetComponent<NodeSuggestionsList> ();
 		nodeSuggestionListScript.populateNodeSuggestionsList ();
 //		SuggestionsScenePanelHolderScript.listWithSuggestionsPanel.SetActive (true);
-		SuggestionsScenePanelHolderScript phs = panelHolder.GetComponent<SuggestionsScenePanelHolderScript>();
+		phs = panelHolder.GetComponent<SuggestionsScenePanelHolderScript>();
 		phs.listWithSuggestionsPanel.SetActive (true);
 	}
 }
