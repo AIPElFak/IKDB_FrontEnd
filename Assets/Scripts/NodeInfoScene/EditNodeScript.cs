@@ -20,7 +20,9 @@ public class EditNodeScript : MonoBehaviour {
 	public GameObject listControl;
 	private bool edit = false;
 
-	void Start () {
+	void Start () 
+	{
+		Debug.Log ("Krk");
 		inputFieldNodeInformation.gameObject.SetActive(false);
 		inputFieldNodeDescription.gameObject.SetActive(false);
 		saveChanges.gameObject.SetActive(false);
@@ -71,16 +73,6 @@ public class EditNodeScript : MonoBehaviour {
 		edit = true;
 	}
 
-	public void backToNodeInfo() {
-		inputFieldNodeInformation.gameObject.SetActive(false);
-		inputFieldNodeDescription.gameObject.SetActive(false);
-		saveChanges.gameObject.SetActive(false);
-		allTypesDropdown.gameObject.SetActive(false);
-		select.gameObject.SetActive(false);
-		deselect.gameObject.SetActive (false);
 
-		backoToNodeInfoButton.gameObject.SetActive(false);
-		edit = false;
-	}
 
 }

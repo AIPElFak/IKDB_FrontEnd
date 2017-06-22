@@ -9,6 +9,7 @@ public class OpenNewRelationshipPanel : MonoBehaviour {
 	public Dropdown nodeToDropdown;
 	GetAllNodesRequestScript serverRequestScript;
 	public GameObject panelHolder;
+	public Text nodeFromText;
 	// Use this for initialization
 	void Start () {
 		
@@ -39,7 +40,7 @@ public class OpenNewRelationshipPanel : MonoBehaviour {
 		}
 		nodeToDropdown.ClearOptions();
 		nodeToDropdown.AddOptions(stringNodes);
-
+		nodeFromText.text = DataHandler.SelectedNrds.node.name;
 
 	}
 }
