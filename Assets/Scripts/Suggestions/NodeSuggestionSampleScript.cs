@@ -23,9 +23,14 @@ public class NodeSuggestionSampleScript : MonoBehaviour {
 	public void onClick()
 	{
 		DataHandler.SelectedNodeSuggestion = nodeSuggestion;
-		SuggestionsScenePanelHolderScript.suggestionsPanel.gameObject.SetActive(false);
+		/* SuggestionsScenePanelHolderScript.suggestionsPanel.gameObject.SetActive(false);
 		SuggestionsScenePanelHolderScript.listWithSuggestionsPanel.gameObject.SetActive(false);
-		SuggestionsScenePanelHolderScript.nodeSuggestionInfoPanel.gameObject.SetActive(true);
+		SuggestionsScenePanelHolderScript.nodeSuggestionInfoPanel.gameObject.SetActive(true); */
+		GameObject panelHolder = GameObject.Find ("SuggestionScenePanelHolder");
+		SuggestionsScenePanelHolderScript phs = panelHolder.GetComponent<SuggestionsScenePanelHolderScript>();
+		phs.suggestionsPanel.SetActive (false);
+		phs.listWithSuggestionsPanel.SetActive (false);
+		phs.nodeSuggestionInfoPanel.SetActive (true);
 
 	}
 }

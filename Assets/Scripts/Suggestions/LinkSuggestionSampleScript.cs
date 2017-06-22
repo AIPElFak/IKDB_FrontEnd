@@ -25,10 +25,14 @@ public class LinkSuggestionSampleScript : MonoBehaviour {
 	public void onClick()
 	{
 		DataHandler.SelectedLinkSuggestion = linkSuggestion;
-		SuggestionsScenePanelHolderScript.suggestionsPanel.gameObject.SetActive(false);
+		/* SuggestionsScenePanelHolderScript.suggestionsPanel.gameObject.SetActive(false);
 		SuggestionsScenePanelHolderScript.listWithSuggestionsPanel.gameObject.SetActive(false);
-		SuggestionsScenePanelHolderScript.linkSuggestionInfoPanel.gameObject.SetActive(true);
-
+		SuggestionsScenePanelHolderScript.linkSuggestionInfoPanel.gameObject.SetActive(true); */
+		GameObject panelHolder = GameObject.Find ("SuggestionScenePanelHolder");
+		SuggestionsScenePanelHolderScript phs = panelHolder.GetComponent<SuggestionsScenePanelHolderScript>();
+		phs.suggestionsPanel.SetActive (false);
+		phs.listWithSuggestionsPanel.SetActive (false);
+		phs.linkSuggestionInfoPanel.SetActive (true);
 
 	}
 

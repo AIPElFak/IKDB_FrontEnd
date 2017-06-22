@@ -21,7 +21,6 @@ public class EditNodeScript : MonoBehaviour {
 	private bool edit = false;
 
 	void Start () {
-
 		inputFieldNodeInformation.gameObject.SetActive(false);
 		inputFieldNodeDescription.gameObject.SetActive(false);
 		saveChanges.gameObject.SetActive(false);
@@ -50,8 +49,8 @@ public class EditNodeScript : MonoBehaviour {
 		allTypesDropdown.gameObject.SetActive(true);
 	//	SaveNodeChangesScript.defText = node.definition;
 	//	SaveNodeChangesScript.descText = node.description;
-		inputFieldNodeInformation.text = node.definition;
-		inputFieldNodeDescription.text = node.description;
+		inputFieldNodeInformation.text = DataHandler.SelectedNrds.node.definition;
+		inputFieldNodeDescription.text = DataHandler.SelectedNrds.node.description;
 		select.gameObject.SetActive(true);
 		deselect.gameObject.SetActive(true);
 	/*

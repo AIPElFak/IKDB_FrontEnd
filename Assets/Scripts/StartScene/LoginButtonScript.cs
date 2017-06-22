@@ -28,10 +28,11 @@ public class LoginButtonScript : MonoBehaviour {
 
 	public void startSubjectsPanel(string[] subjects)
 	{
+		//Debug.Log (subjects[0]);
 		DataHandler.Subjects=subjects;
 
 		//nova scena se tu otvara
-		SceneManager.LoadScene(1);
+		SceneManager.LoadScene("MainMenuScene");
 
 	}
 

@@ -25,7 +25,7 @@ public class SearchByCategoriesScript : MonoBehaviour {
 	{
 		// Debug.Log("Click");
 		getNodesServerRequestScript = serverRequester.GetComponent<GetNodesServerRequestScript>();
-		getNodesServerRequestScript.categoriesNodeRequest(SelectedSubjectsClass.SelectedSubjects, clickCallback);
+		getNodesServerRequestScript.categoriesNodeRequest(DataHandler.SelectedSubjects, clickCallback);
 
 	//	createScrollList.clearNodeList();
 

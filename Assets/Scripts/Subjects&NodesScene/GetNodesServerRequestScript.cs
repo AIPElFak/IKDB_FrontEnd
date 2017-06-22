@@ -42,7 +42,7 @@ public class GetNodesServerRequestScript : MonoBehaviour  {
 
 		if (www.error == null)
 		{
-			//  Debug.Log(www.text);
+			 Debug.Log(www.text);
 			List<Node> nodeArray = JsonMapper.ToObject<List<Node>>(www.text);
 			//   Debug.Log("nodeArray[0] : "+nodeArray[0].name);
 			categoriesCallback(nodeArray);

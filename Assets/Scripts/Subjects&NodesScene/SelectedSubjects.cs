@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public static class SelectedSubjectsClass  {
 
-	private static List<string> selectedSubjects;
+	private static List<string> selectedSubjects = new List<string> ();
 	public static List<string> SelectedSubjects {
 		get {
 			return selectedSubjects;
@@ -15,7 +15,8 @@ public static class SelectedSubjectsClass  {
 		}
 	}
 
-	private static Text selectedSubjectsText;
+	private static Text selectedSubjectsText = GameObject.Find ("SelectedSubjectsText").GetComponent<Text> ();
+
 	public static Text SelectedSubjectsText {
 		get {
 			return selectedSubjectsText;
@@ -27,7 +28,7 @@ public static class SelectedSubjectsClass  {
 
 	public static void addToList(string name)
 	{
-		if(SelectedSubjects.Contains(name))
+		if(!SelectedSubjects.Contains(name))
 			SelectedSubjects.Add(name);
 		if (selectedSubjects.Count > 0)
 		{

@@ -6,7 +6,7 @@ public class SubjectsScrollList : MonoBehaviour {
 
 	public Transform contentPanel;
 	public GameObject sampleButton;
-	string[] subjects;
+	//string[] subjects;
 	// Use this for initialization
 	void Start () {
 		
@@ -19,9 +19,10 @@ public class SubjectsScrollList : MonoBehaviour {
 
 	public  void PopulateSubjectsList()
 	{
-		if (subjects != null)
+		Debug.Log (DataHandler.Subjects [0]);
+		if (DataHandler.Subjects != null)
 		{
-			foreach (string s in subjects)
+			foreach (string s in DataHandler.Subjects)
 			{
 				GameObject newButton = Instantiate(sampleButton) as GameObject;
 				//    GameObject newToggle = Instantiate(sampleToggle) as GameObject;

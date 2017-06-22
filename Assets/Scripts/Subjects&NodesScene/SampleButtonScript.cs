@@ -7,9 +7,12 @@ public class SampleButtonScript : MonoBehaviour {
 
 	public Text nameLabel;
 	private bool buttonClicked = false;
+	public GameObject selectedSubjectsTextController;
+	public SelectedSubjectsTextController selectedSubjectsTextControllerScript;
 	// Use this for initialization
 	void Start () {
-		
+		selectedSubjectsTextController = GameObject.Find ("SelectedSubjectsTextController");
+		selectedSubjectsTextControllerScript = selectedSubjectsTextController.GetComponent<SelectedSubjectsTextController> ();
 	}
 	
 	// Update is called once per frame
@@ -22,7 +25,7 @@ public class SampleButtonScript : MonoBehaviour {
 		if (buttonClicked)
 		{
 			buttonClicked = false;
-			SelectedSubjectsClass.removeFromList(nameLabel.text);
+			selectedSubjectsTextControllerScript.removeFromList(nameLabel.text);
 			//  nameLabel.text = nameLabel.text.ToLower();
 
 			// Debug.Log("true->false");
@@ -30,7 +33,7 @@ public class SampleButtonScript : MonoBehaviour {
 		else
 		{
 			buttonClicked = true;
-			SelectedSubjectsClass.addToList(nameLabel.text);
+			selectedSubjectsTextControllerScript.addToList(nameLabel.text);
 
 			// Debug.Log("false->true");
 		}

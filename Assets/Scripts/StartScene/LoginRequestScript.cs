@@ -46,8 +46,8 @@ public class LoginRequestScript : MonoBehaviour {
 		{
 			LoginResponse loginResponse = JsonMapper.ToObject<LoginResponse>(www.text);
 			DataHandler.Token = loginResponse.token;
-			this.userId = loginResponse.user_id;
-			this.allLabels = loginResponse.labels;
+			DataHandler.UserId = loginResponse.user_id;
+			//this.allLabels = loginResponse.labels;
 			loginCallback(loginResponse.labels);
 			//Debug.Log(DataHandler.token);
 		}

@@ -8,6 +8,7 @@ public class OpenLinkSuggestions : MonoBehaviour {
 	GetAllLinkSuggestionsRequest serverRequestScript;
 	public GameObject listControler;
 	LinkSuggestionsList linkSuggestionListScript;
+	public GameObject panelHolder;
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +35,9 @@ public class OpenLinkSuggestions : MonoBehaviour {
 		DataHandler.AllLinkSuggestions = linkSuggestions;
 		linkSuggestionListScript = listControler.GetComponent<LinkSuggestionsList> ();
 		linkSuggestionListScript.populateLinkSuggestionsList ();
-		SuggestionsScenePanelHolderScript.listWithSuggestionsPanel.SetActive (true);
+//		SuggestionsScenePanelHolderScript.listWithSuggestionsPanel.SetActive (true);
+		SuggestionsScenePanelHolderScript phs = panelHolder.GetComponent<SuggestionsScenePanelHolderScript>();
+		phs.listWithSuggestionsPanel.SetActive (true);
+
 	}
 }

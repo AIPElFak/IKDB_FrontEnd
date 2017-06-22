@@ -117,5 +117,14 @@ public static class DataHandler  {
 		}
 	}
 
+	public static List<string> selectedSubjects = new List<string> ();
+	public static List<string> SelectedSubjects {
+		get { 
+			return selectedSubjects;
+		}
+		set { 
+			selectedSubjects = value;
+		}
+	}
 
 }

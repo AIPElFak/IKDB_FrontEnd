@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NodeSampleButtonScript : MonoBehaviour {
 
@@ -60,6 +61,7 @@ public class NodeSampleButtonScript : MonoBehaviour {
 		// za ovo napravi u DataHandler script jedan Node(singleton moze) koji ce da cuva selektovani Node i
 		// i sve info za njega
 		DataHandler.SelectedNrds=nrds;
+		SceneManager.LoadScene ("NodeInfoScene");
 
 	/*	Text nodeNameText = GameObject.Find("nodeNameText").GetComponent<Text>();
 		nodeNameText.text = node.name;

@@ -28,8 +28,8 @@ public class LoadRelationshipInfoScene : MonoBehaviour {
 		nodeFromText.text = DataHandler.SelectedRelationship.start_name.ToString ();
 		nodeToText.text = DataHandler.SelectedRelationship.end_name.ToString ();
 		relationshipTypeText.text = DataHandler.SelectedRelationship._type.ToString ();
-		votesForText.text = DataHandler.SelectedRelationship.votes_for.ToString ();
-		votesAgainstText.text = DataHandler.SelectedRelationship.votes_against.ToString ();
+		votesForText.text = DataHandler.SelectedRelationship.votes_for.Count.ToString ();
+		votesAgainstText.text = DataHandler.SelectedRelationship.votes_against.Count.ToString ();
 		relationshipDescText.text = DataHandler.SelectedRelationship.description;
 		
 	}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VoteOnNodeScript : MonoBehaviour {
 	
-	GameObject serverRequest;
+	public GameObject serverRequest;
 	VoteNodeServerRequests voteNodeServerRequest;
 	// Use this for initialization
 	void Start () {
