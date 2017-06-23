@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SearchByCategoriesScript : MonoBehaviour {
 
@@ -9,6 +10,9 @@ public class SearchByCategoriesScript : MonoBehaviour {
 	public GameObject nodesScrollListController;
 	public GameObject serverRequester;
 	public GameObject panelHolder;
+	public Button addCategoryButton;
+	public Button deleteCategoryButton;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -46,5 +50,8 @@ public class SearchByCategoriesScript : MonoBehaviour {
 
 		createScrollList.nodeList = array;
 		createScrollList.populateNodeList();
+
+		deleteCategoryButton.gameObject.SetActive (false);
+		addCategoryButton.gameObject.SetActive (false);
 	}
 }
