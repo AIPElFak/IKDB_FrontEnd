@@ -34,6 +34,7 @@ public class OpenLinkSuggestions : MonoBehaviour {
 	{
 		DataHandler.AllLinkSuggestions = linkSuggestions;
 		linkSuggestionListScript = listControler.GetComponent<LinkSuggestionsList> ();
+		linkSuggestionListScript.clearLinkSuggestionsList ();
 		linkSuggestionListScript.populateLinkSuggestionsList ();
 //		SuggestionsScenePanelHolderScript.listWithSuggestionsPanel.SetActive (true);
 		SuggestionsScenePanelHolderScript phs = panelHolder.GetComponent<SuggestionsScenePanelHolderScript>();

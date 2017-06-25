@@ -33,7 +33,9 @@ public class LinkSuggestionSampleScript : MonoBehaviour {
 		phs.suggestionsPanel.SetActive (false);
 		phs.listWithSuggestionsPanel.SetActive (false);
 		phs.linkSuggestionInfoPanel.SetActive (true);
-
+		GameObject infoLoader = GameObject.Find ("InfoLoaderObject");
+		LoadLinkSuggestionInfo llsi = infoLoader.GetComponent<LoadLinkSuggestionInfo> ();
+		llsi.populateFields ();
 	}
 
 }

@@ -35,9 +35,11 @@ public class OpenNodeSuggestions : MonoBehaviour {
 	{
 		DataHandler.AllNodeSuggestions = nodeSuggestions;
 		nodeSuggestionListScript = listControler.GetComponent<NodeSuggestionsList> ();
+		nodeSuggestionListScript.clearNodeSuggestionsList ();
 		nodeSuggestionListScript.populateNodeSuggestionsList ();
 //		SuggestionsScenePanelHolderScript.listWithSuggestionsPanel.SetActive (true);
 		phs = panelHolder.GetComponent<SuggestionsScenePanelHolderScript>();
 		phs.listWithSuggestionsPanel.SetActive (true);
+
 	}
 }

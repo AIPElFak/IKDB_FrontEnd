@@ -31,6 +31,8 @@ public class NodeSuggestionSampleScript : MonoBehaviour {
 		phs.suggestionsPanel.SetActive (false);
 		phs.listWithSuggestionsPanel.SetActive (false);
 		phs.nodeSuggestionInfoPanel.SetActive (true);
-
+		GameObject infoLoader = GameObject.Find ("InfoLoaderObject");
+		LoadNodeSuggestionInfo lnsi = infoLoader.GetComponent<LoadNodeSuggestionInfo> ();
+		lnsi.populateFields ();
 	}
 }
