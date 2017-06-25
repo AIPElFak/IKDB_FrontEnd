@@ -117,7 +117,7 @@ public static class DataHandler  {
 		}
 	}
 
-	public static List<string> selectedSubjects = new List<string> ();
+	private static List<string> selectedSubjects = new List<string> ();
 	public static List<string> SelectedSubjects {
 		get { 
 			return selectedSubjects;
@@ -126,5 +126,69 @@ public static class DataHandler  {
 			selectedSubjects = value;
 		}
 	}
+	private static GameObject selectedPopup;
+	public static GameObject SelectedPopup {
+		get { 
+			return selectedPopup;
+		}
+		set { 
+			selectedPopup = value;
+		}
+	}
 
+	//camera movemenet part
+	private static float minX;
+	public static float MinX {
+		get {
+			return minX;
+		}
+		set {
+			minX = value;
+		}
+	}
+	private static float maxX;
+	public static float MaxX {
+		get {
+			return maxX;
+		}
+		set {
+			maxX = value;
+		}
+	}
+	private static float minY;
+	public static float MinY {
+		get {
+			return minY;
+		}
+		set {
+			minY = value;
+		}
+	}
+	private static float maxY;
+	public static float MaxY {
+		get {
+			return maxY;
+		}
+		set {
+			maxY = value;
+		}
+	}
+	private static float minZ;
+	public static float MinZ {
+		get {
+			return minZ;
+		}
+		set {
+			minZ = value;
+		}
+	}
+	private static float maxZ;
+	public static float MaxZ {
+		get {
+			return maxZ;
+		}
+		set {
+			maxZ = value;
+		}
+	}
 }

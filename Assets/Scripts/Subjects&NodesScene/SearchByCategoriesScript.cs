@@ -48,6 +48,7 @@ public class SearchByCategoriesScript : MonoBehaviour {
 		panelHolder.GetComponent<PanelHolderScript2> ().nodesPanel.SetActive (true);
 		NodesScrollList createScrollList = nodesScrollListController.GetComponent<NodesScrollList>();
 
+		createScrollList.clearNodeList ();
 		createScrollList.nodeList = array;
 		createScrollList.populateNodeList();
 

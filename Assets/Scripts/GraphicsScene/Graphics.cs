@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class Graphics : MonoBehaviour {
 
 	public GameObject sphere;
-
+	public GameObject popup;
 	// Use this for initialization
 	void Start () {
 		
@@ -58,6 +58,12 @@ public class Graphics : MonoBehaviour {
 			}
 			level++;
 			largeCircleR += 5 * r;
+			DataHandler.MinX = -largeCircleR;
+			DataHandler.MaxX = largeCircleR;
+			DataHandler.MaxY = largeCircleR;
+			DataHandler.MinY = -largeCircleR;
+			DataHandler.MaxZ = 5 * level;
+			DataHandler.MinZ = -5 * level;
 			offset += Mathf.Asin ((3F * r) / largeCircleR);
 		}
 		
@@ -66,17 +72,38 @@ public class Graphics : MonoBehaviour {
 	}
 	void Update () {
 		if (Input.GetMouseButtonUp(0)) {
-			RaycastHit hit;
+			RaycastHit hit = new RaycastHit ();
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			Physics.Raycast (ray, out hit);
+			Vector3 clickPosition = hit.point;
 			if (hit.collider!=null) {
 				Debug.Log (hit.transform.name);
+				//ShowPopup ("See node info ?", 2, clickPosition);
+				GameObject popupObject = Instantiate(popup) as GameObject;
+				Vector3 v = new Vector3 (clickPosition.x, clickPosition.y + 1.0F, clickPosition.z);
+				DataHandler.SelectedPopup = popupObject;
+				popupObject.transform.position = v;
+				Debug.Log (hit.point);
 
+				//popupObject.SetActive (false);
 			}
 			else
 				Debug.Log ("You haven't clicked on node");
 
 		}
+
+	}
+	IEnumerator ShowPopup (string message, float delay,Vector3 vector) {
+		GameObject popupObject = Instantiate(popup) as GameObject;	
+		Debug.Log("popup");
+		//SphereCollider sc = new SphereCollider();
+		//sc.enabled=true;
+		//sc.gameObject.SetActive (true);
+		Vector3 v = new Vector3 (vector.x, vector.y + 1.0F, vector.z - 0.5F);
+		//sc.transform.position=v;
+		popupObject.transform.position = v;
+		yield return new WaitForSeconds(delay);
+
 
 	}
 
