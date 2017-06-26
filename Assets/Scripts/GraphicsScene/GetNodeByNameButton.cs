@@ -3,27 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SeeNodeInfo : MonoBehaviour {
 
+public class GetNodeByNameButton : MonoBehaviour {
 
 	public GameObject serverRequester;
 	GetNodeByNameServerRequest getNodeByNameServerRequest;
 	// Use this for initialization
 	void Start () {
-
+		
 	}
-
+	
 	// Update is called once per frame
 	void Update () {
-
+		
 	}
 
-	public void onClick()
+	public void onNodeClick()
 	{
-		serverRequester = GameObject.Find("GraphicsSceneServerRequster");
-		Debug.Log ("see node info");
-		//getNodeByNameServerRequest = serverRequester.GetComponent<GetNodeByNameServerRequest> ();
-		//getNodeByNameServerRequest.nodeInformationRequest (DataHandler.GraphicSceneSelectedNode, onNodeClickCallback);
+		getNodeByNameServerRequest = serverRequester.GetComponent<GetNodeByNameServerRequest> ();
+		getNodeByNameServerRequest.nodeInformationRequest ("nodeName", onNodeClickCallback);
 	}
 
 	public void onNodeClickCallback(NodeRelationshipDataSet nrds)

@@ -77,15 +77,13 @@ public class Graphics : MonoBehaviour {
 			Physics.Raycast (ray, out hit);
 			Vector3 clickPosition = hit.point;
 			if (hit.collider!=null) {
-				Debug.Log (hit.transform.name);
+				SphereScript ss = hit.collider.GetComponent<SphereScript> ();
+				DataHandler.GraphicSceneSelectedNode=ss.textHolder.GetComponent<TextMesh> ().text;
 				//ShowPopup ("See node info ?", 2, clickPosition);
 				GameObject popupObject = Instantiate(popup) as GameObject;
 				Vector3 v = new Vector3 (clickPosition.x, clickPosition.y + 1.0F, clickPosition.z);
 				DataHandler.SelectedPopup = popupObject;
 				popupObject.transform.position = v;
-				Debug.Log (hit.point);
-
-				//popupObject.SetActive (false);
 			}
 			else
 				Debug.Log ("You haven't clicked on node");

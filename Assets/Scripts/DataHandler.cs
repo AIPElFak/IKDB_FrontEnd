@@ -136,6 +136,17 @@ public static class DataHandler  {
 		}
 	}
 
+	private static string graphicSceneSelectedNode;
+	public static string GraphicSceneSelectedNode {
+		get { 
+			return graphicSceneSelectedNode;
+		}
+		set { 
+			graphicSceneSelectedNode = value;
+		}
+	}
+
+
 	//camera movemenet part
 	private static float minX;
 	public static float MinX {
