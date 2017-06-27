@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetLinkSuggestionRequst : MonoBehaviour {
+public class DontDestroySocketIO : MonoBehaviour {
+
+	public GameObject socetIOObject;
 
 	// Use this for initialization
 	void Start () {
@@ -12,5 +14,9 @@ public class GetLinkSuggestionRequst : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void Awake() {
+		DontDestroyOnLoad (socetIOObject);
 	}
 }

@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SocketIO;
 
 public class LinkSuggestionsList : MonoBehaviour {
 
 	public GameObject sampleLinkSuggestion;
 	public Transform linkSuggestionsPanel;
+	public bool toListen = true;
+	SocketIOComponent socketIO;
+	public GameObject serverRequest;
+	GetAllLinkSuggestionsRequest getAllLinkSuggestionsRequest;
 	// Use this for initialization
 	void Start () {
-		
+		toListen = true;
+		socketIO = GameObject.Find ("SocketIO").GetComponent<SocketIOComponent> ();
+		socketIO.On ("globalupdate", OnLinkSuggestionEvent);
 	}
 	
 	// Update is called once per frame
@@ -17,6 +24,10 @@ public class LinkSuggestionsList : MonoBehaviour {
 	}
 	public void populateLinkSuggestionsList()
 	{
+		if (toListen) {
+			socketIO.On ("linksuggestion", OnLinkSuggestionEvent);
+			toListen = false;
+		}
 		if (DataHandler.AllLinkSuggestions.Count > 0)
 		{
 			foreach (LinkSuggestion ls in DataHandler.AllLinkSuggestions)
@@ -47,4 +58,17 @@ public class LinkSuggestionsList : MonoBehaviour {
 		//linkSuggestions = null;
 		//  populateNodeList();
 	}
+	public void OnLinkSuggestionEvent(SocketIOEvent e) {
+		getAllLinkSuggestionsRequest = serverRequest.GetComponent<GetAllLinkSuggestionsRequest> ();
+		getAllLinkSuggestionsRequest.linkSuggestionsRequest (linkSuggestionsRequestCallback);
+	}
+	public void linkSuggestionsRequestCallback(List<LinkSuggestion> linkSuggestions)
+	{
+		
+		DataHandler.AllLinkSuggestions = linkSuggestions;
+		clearLinkSuggestionsList ();
+		populateLinkSuggestionsList ();
+	}
+
+
 }

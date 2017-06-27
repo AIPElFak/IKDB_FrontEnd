@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SocketIO;
 
 public class LoadNodeInfoScene : MonoBehaviour {
 
@@ -14,11 +15,28 @@ public class LoadNodeInfoScene : MonoBehaviour {
 	private Node node;
 	public GameObject panelHolder;
 	public GameObject listController;
+	public SocketIOComponent socketIO;
+	public GameObject serverRequster;
+	GetNodeInforServerRequestScript serverRequestScript;
 
 	// Use this for initialization
 	void Start() {
 		
-	    node = DataHandler.SelectedNrds.node;
+		populateNodeInfo ();
+		socketIO = GameObject.Find ("SocketIO").GetComponent<SocketIOComponent>();
+		socketIO.On ("node-" + DataHandler.SelectedNrds.node._id, OnNodeEvent);
+		//CreateScrollList createSL = scrollListController.GetComponent<CreateScrollList>();
+		//createSL.relationshipsList = relatioships;
+		//createSL.populateRelationshipList();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+	public void populateNodeInfo() {
+		node = DataHandler.SelectedNrds.node;
 		//node=DataHandler.SelctedNode;
 		Text nodeNameText = nodeName.GetComponent<Text>();
 		nodeNameText.text = node.name;
@@ -40,13 +58,19 @@ public class LoadNodeInfoScene : MonoBehaviour {
 		RelationshipListScript relationshipLisScript = listController.GetComponent<RelationshipListScript> ();
 		relationshipLisScript.clearRelationshipsList ();
 		relationshipLisScript.populateRelationshipList ();
-		//CreateScrollList createSL = scrollListController.GetComponent<CreateScrollList>();
-		//createSL.relationshipsList = relatioships;
-		//createSL.populateRelationshipList();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void OnNodeEvent(SocketIOEvent socketIOEvent) {
+		Debug.Log ("onNodeEvent");
+		serverRequestScript = serverRequster.GetComponent<GetNodeInforServerRequestScript> ();
+		serverRequestScript.nodeInformationRequest (DataHandler.SelectedNrds.node._id, nodeInfoCallback);
 	}
+
+	public void nodeInfoCallback(NodeRelationshipDataSet nrds)
+	{
+		Debug.Log ("upao");
+		DataHandler.SelectedNrds=nrds;
+		populateNodeInfo ();
+	}
+
 }

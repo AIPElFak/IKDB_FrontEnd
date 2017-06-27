@@ -26,33 +26,6 @@ public class NodeSampleButtonScript : MonoBehaviour {
 		GetNodeInforServerRequestScript getNodeInforServerRequestScript = serverRequester.GetComponent<GetNodeInforServerRequestScript> ();
 		getNodeInforServerRequestScript.nodeInformationRequest (node._id, onNodeClickCallback);
 //		serverRequestScript.nodeInformationRequest(node._id, onNodeClickCallback);
-		//GameObject canvas = GameObject.Find("Canvas");
-		//canvas.gameObject.SetActive(false);
-		//GameObject mainNode = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		//Vector3 v3Start = new Vector3(0, 0, 0);
-		//Vector3 v3End;
-		//mainNode.transform.position = new Vector3(0, 0, -4);
-		//// Camera.main.ScreenToWorldPoint( Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane) );
-		//mainNode.transform.localScale += new  Vector3(1.0f,1.0f,1.0f);
-		//GameObject s;
-		//GameObject link;
-		//Debug.Log(relationship.Length);
-		//for(int i = 0;i<relationship.Length;i++)
-		//{
-
-		//   s = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		//   v3End = new Vector3((Random.value * 18) - 9, (Random.value * 10) - 5, (Random.value * 7) - 3.5f);
-		//   s.transform.position = v3End;
-		//   //Gizmos.color = Color.blue;
-		//   //Gizmos.DrawLine(startVector, endVector);
-		//   GameObject line = new GameObject();
-		//   line.AddComponent<LineRenderer>();
-		//   LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
-		//   lineRenderer.SetPosition(0, v3Start);
-		//   lineRenderer.SetPosition(1, v3End);
-		//   lineRenderer.SetWidth(0.2f, 0.2f);
-
-		//}
 
 	}
 

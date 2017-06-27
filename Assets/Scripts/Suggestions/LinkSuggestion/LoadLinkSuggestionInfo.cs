@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SocketIO;
 
 public class LoadLinkSuggestionInfo : MonoBehaviour {
 
@@ -15,10 +16,14 @@ public class LoadLinkSuggestionInfo : MonoBehaviour {
 	public Button voteForButton;
 	public Button voteAgainstButton;
 	public Button backButton;
+	public GameObject serverRequest;
+	public GetLinkSuggestionRequest serverRequestScript;
+	SocketIOComponent socketIO;
 
 	// Use this for initialization
 	void Start () {
-
+		socketIO = GameObject.Find ("SocketIO").GetComponent<SocketIOComponent>();
+		//socketIO.On ("linksuggestion-" + DataHandler.SelectedLinkSuggestion._id,OnLinkSuggestionEvent);
 	}
 
 	// Update is called once per frame
@@ -28,6 +33,7 @@ public class LoadLinkSuggestionInfo : MonoBehaviour {
 
 	public void populateFields()
 	{
+		socketIO.On ("linksuggestion-" + DataHandler.SelectedLinkSuggestion._id,OnLinkSuggestionEvent);
 		startNode.text = DataHandler.SelectedLinkSuggestion.start_name;
 		endNode.text = DataHandler.SelectedLinkSuggestion.end_name;
 		suggType.text = DataHandler.SelectedLinkSuggestion.suggestion_type;
@@ -35,5 +41,15 @@ public class LoadLinkSuggestionInfo : MonoBehaviour {
 		votesAgainst.text = DataHandler.SelectedLinkSuggestion.votes_against.Count.ToString();
 		description.text = DataHandler.SelectedLinkSuggestion.description;
 		linkType.text = DataHandler.SelectedLinkSuggestion.type;
+	}
+
+	public void OnLinkSuggestionEvent(SocketIOEvent socketIOEvent) {
+		serverRequestScript = serverRequest.GetComponent<GetLinkSuggestionRequest> ();
+		serverRequestScript.linkSuggestionsRequest (DataHandler.SelectedLinkSuggestion._id, nodeSuggestionReqCallback);
+	}
+
+	public void nodeSuggestionReqCallback(LinkSuggestion ls) {
+		DataHandler.SelectedLinkSuggestion = ls;
+		populateFields ();
 	}
 }

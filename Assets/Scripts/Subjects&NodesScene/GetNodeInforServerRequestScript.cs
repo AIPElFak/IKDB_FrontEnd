@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using LitJson;
+using UnityEngine.SceneManagement;
 
 public class GetNodeInforServerRequestScript : MonoBehaviour {
 
@@ -32,11 +33,16 @@ public class GetNodeInforServerRequestScript : MonoBehaviour {
 	IEnumerator waitForNodeInformationRequest(WWW www, Action<NodeRelationshipDataSet> nodeInfoCallback)
 	{
 		yield return www;
+		if (www.error != null) {
+			Debug.Log ("Node is deleted");
+			SceneManager.LoadScene ("MainMenuScene");
 
-		NodeRelationshipDataSet nrds = JsonMapper.ToObject<NodeRelationshipDataSet>(www.text);
-		nrds.node.labels = nrds.labels;
+		} else {
+			NodeRelationshipDataSet nrds = JsonMapper.ToObject<NodeRelationshipDataSet> (www.text);
+			nrds.node.labels = nrds.labels;
 
-		nodeInfoCallback(nrds);
+			nodeInfoCallback (nrds);
+		}
 
 	}
 }

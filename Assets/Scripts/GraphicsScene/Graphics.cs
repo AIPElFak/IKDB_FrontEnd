@@ -2,14 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SocketIO;
 
 public class Graphics : MonoBehaviour {
 
 	public GameObject sphere;
 	public GameObject popup;
+	SocketIOComponent socketIO;
+	public GameObject serverRequest;
+	GetNodeInforServerRequestScript getNodeInforServerRequestScript;
 	// Use this for initialization
 	void Start () {
+		Draw ();
+		socketIO = GameObject.Find ("SocketIO").GetComponent<SocketIOComponent> ();
+		socketIO.On ("globalupdate", OnGlobalUpdateEvent);
+	}
+	void Update () {
+		if (Input.GetMouseButtonUp(0)) {
+			RaycastHit hit = new RaycastHit ();
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			Physics.Raycast (ray, out hit);
+			Vector3 clickPosition = hit.point;
+			if (hit.collider!=null) {
+				SphereScript ss = hit.collider.GetComponent<SphereScript> ();
+				DataHandler.GraphicSceneSelectedNode=ss.textHolder.GetComponent<TextMesh> ().text;
+				//ShowPopup ("See node info ?", 2, clickPosition);
+				GameObject popupObject = Instantiate(popup) as GameObject;
+				Vector3 v = new Vector3 (clickPosition.x, clickPosition.y + 1.0F, clickPosition.z);
+				DataHandler.SelectedPopup = popupObject;
+				popupObject.transform.position = v;
+			}
+			else
+				Debug.Log ("You haven't clicked on node");
+
+		}
+
+	}
+	IEnumerator ShowPopup (string message, float delay,Vector3 vector) {
+		GameObject popupObject = Instantiate(popup) as GameObject;	
+		Debug.Log("popup");
+		//SphereCollider sc = new SphereCollider();
+		//sc.enabled=true;
+		//sc.gameObject.SetActive (true);
+		Vector3 v = new Vector3 (vector.x, vector.y + 1.0F, vector.z - 0.5F);
+		//sc.transform.position=v;
+		popupObject.transform.position = v;
+		yield return new WaitForSeconds(delay);
+
+
+	}
+
+	public void Draw() {
 		
+
 		//GameObject mainNode = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 		GameObject mainNode = Instantiate(sphere) as GameObject;
 		SphereScript mainSphereScript = mainNode.GetComponent<SphereScript> ();
@@ -17,7 +62,7 @@ public class Graphics : MonoBehaviour {
 		Vector3 v3Start = new Vector3 (0, 0, -4);
 		Vector3 v3End;
 		mainNode.transform.position = new Vector3 (0, 0, -4);
-//		mainNode.tag = DataHandler.SelectedNrds.node.name;
+		//		mainNode.tag = DataHandler.SelectedNrds.node.name;
 		// Camera.main.ScreenToWorldPoint( Vector3(Screen.width/2, Screen.height/2, Camera.main.nearClipPlane) );
 		//mainNode.transform.localScale += new  Vector3 (1.0f, 1.0f, 1.0f);
 
@@ -61,55 +106,37 @@ public class Graphics : MonoBehaviour {
 			}
 			level++;
 			largeCircleR += 5 * r;
-			DataHandler.MinX = -largeCircleR;
-			DataHandler.MaxX = largeCircleR;
-			DataHandler.MaxY = largeCircleR;
-			DataHandler.MinY = -largeCircleR;
-			DataHandler.MaxZ = 5 * level;
-			DataHandler.MinZ = -5 * level;
+
 			offset += Mathf.Asin ((3F * r) / largeCircleR);
 		}
-		
-
-	
+		DataHandler.MinX = -largeCircleR;
+		DataHandler.MaxX = largeCircleR;
+		DataHandler.MaxY = largeCircleR;
+		DataHandler.MinY = -largeCircleR;
+		DataHandler.MaxZ = 5 * level;
+		DataHandler.MinZ = -5 * level;
 	}
-	void Update () {
-		if (Input.GetMouseButtonUp(0)) {
-			RaycastHit hit = new RaycastHit ();
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			Physics.Raycast (ray, out hit);
-			Vector3 clickPosition = hit.point;
-			if (hit.collider!=null) {
-				SphereScript ss = hit.collider.GetComponent<SphereScript> ();
-				DataHandler.GraphicSceneSelectedNode=ss.textHolder.GetComponent<TextMesh> ().text;
-				//ShowPopup ("See node info ?", 2, clickPosition);
-				GameObject popupObject = Instantiate(popup) as GameObject;
-				Vector3 v = new Vector3 (clickPosition.x, clickPosition.y + 1.0F, clickPosition.z);
-				DataHandler.SelectedPopup = popupObject;
-				popupObject.transform.position = v;
-			}
-			else
-				Debug.Log ("You haven't clicked on node");
 
+	public void clearScene() {
+		GameObject[] objects = GameObject.FindObjectsOfType<GameObject> ();
+		foreach (GameObject o in objects) {
+			Destroy (o);
 		}
-
-	}
-	IEnumerator ShowPopup (string message, float delay,Vector3 vector) {
-		GameObject popupObject = Instantiate(popup) as GameObject;	
-		Debug.Log("popup");
-		//SphereCollider sc = new SphereCollider();
-		//sc.enabled=true;
-		//sc.gameObject.SetActive (true);
-		Vector3 v = new Vector3 (vector.x, vector.y + 1.0F, vector.z - 0.5F);
-		//sc.transform.position=v;
-		popupObject.transform.position = v;
-		yield return new WaitForSeconds(delay);
-
-
 	}
 
-	public void onClick() {
-		
+	public void OnGlobalUpdateEvent(SocketIOEvent e) {
+		GetNodeInforServerRequestScript getNodeInforServerRequestScript = serverRequest.GetComponent<GetNodeInforServerRequestScript> ();
+		getNodeInforServerRequestScript.nodeInformationRequest (DataHandler.SelectedNrds.node._id, onNodeClickCallback);
+	}
 
+
+	public void onNodeClickCallback(NodeRelationshipDataSet nrds)
+	{
+		// za ovo napravi u DataHandler script jedan Node(singleton moze) koji ce da cuva selektovani Node i
+		// i sve info za njega
+
+		DataHandler.SelectedNrds=nrds;
+		clearScene ();
+		Draw ();
 	}
 }

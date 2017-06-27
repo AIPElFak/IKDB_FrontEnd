@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SocketIO;
 
 public class NodeSuggestionsList : MonoBehaviour {
 
 	public GameObject sampleNodeSuggestion;
 	public Transform nodeSuggestionsContentPanel;
+	SocketIOComponent socketIO;
+	bool toListen = true;
+	public GameObject serverRequest;
+	GetAllNodeSuggestionsRequest getAllNodeSuggestionsRequest;
 
 	// Use this for initialization
 	void Start () {
-		
+		toListen = true;
+		socketIO = GameObject.Find ("SocketIO").GetComponent<SocketIOComponent> ();
+		socketIO.On ("globalupdate", OnNodeSuggestionEvent);
 	}
 	
 	// Update is called once per frame
@@ -19,6 +26,10 @@ public class NodeSuggestionsList : MonoBehaviour {
 
 	public void populateNodeSuggestionsList()
 	{
+		if (toListen) {
+			socketIO.On ("nodesuggestion", OnNodeSuggestionEvent);
+			toListen = false;
+		}
 		if (DataHandler.AllNodeSuggestions.Count>0)
 		{
 			foreach (NodeSuggestion ns in DataHandler.AllNodeSuggestions)
@@ -48,5 +59,17 @@ public class NodeSuggestionsList : MonoBehaviour {
 		}
 		//nodeSuggestions = null;
 		//  populateNodeList();
+	}
+
+	public void OnNodeSuggestionEvent(SocketIOEvent socketIOEvent) { 
+		getAllNodeSuggestionsRequest = serverRequest.GetComponent<GetAllNodeSuggestionsRequest> ();
+		getAllNodeSuggestionsRequest.nodeSuggestionsRequest (nodeSuggestionRequestsCallback);
+	}
+	public void nodeSuggestionRequestsCallback(List<NodeSuggestion> nodeSuggestions)
+	{
+		DataHandler.AllNodeSuggestions = nodeSuggestions;
+		clearNodeSuggestionsList ();
+		populateNodeSuggestionsList ();
+
 	}
 }

@@ -4,15 +4,20 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using SocketIO;
 
 public class NodesScrollList : MonoBehaviour {
 
 	public Transform nodeContentPanel;
 	public GameObject sampleNodeButton;
 	public  List<Node> nodeList;
+	public GameObject serverRequest;
+	GetNodesServerRequestScript getNodesServerRequestScript;
+	SocketIOComponent socketIO;
 	// Use this for initialization
 	void Start () {
-		
+		socketIO = GameObject.Find ("SocketIO").GetComponent<SocketIOComponent> ();
+		socketIO.On ("globalupdate", OnGlobalUpdateEvent);
 	}
 	
 	// Update is called once per frame
@@ -51,5 +56,27 @@ public class NodesScrollList : MonoBehaviour {
 		}
 		nodeList = null;
 		//  populateNodeList();
+	}
+
+	public void OnGlobalUpdateEvent(SocketIOEvent e) {
+		getNodesServerRequestScript = serverRequest.GetComponent<GetNodesServerRequestScript> ();
+		getNodesServerRequestScript.categoriesNodeRequest(DataHandler.SelectedSubjects, clickCallback);
+
+	}
+
+
+	public void clickCallback(List<Node> array)
+	{
+		//nodes = array;
+		SelectedNodesClass.SelectedNodes = array;
+
+		if(array==null)
+		{
+			Debug.Log("Nema cvorova za prikaz");
+			return;
+		}
+		clearNodeList ();
+		nodeList = array;
+		populateNodeList();
 	}
 }

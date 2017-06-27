@@ -9,7 +9,7 @@ public class RelationshipVotes : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		serverRequestScript = serverRequest.GetComponent<RelationshipVotesRequests> ();
 	}
 	
 	// Update is called once per frame

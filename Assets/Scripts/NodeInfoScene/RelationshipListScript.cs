@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SocketIO;
 
 public class RelationshipListScript : MonoBehaviour {
 
 	List<Relationship> relationshipsList;
 	public Transform relationshipContentPanel;
 	public GameObject sampleRelationshipButton;
+	public GameObject serverRequest;
+	GetNodeInforServerRequestScript getNodeInforServerRequestScript;
+	SocketIOComponent socketIO;
 	// Use this for initialization
 	void Start () {
-		
+		socketIO = GameObject.Find ("SocketIO").GetComponent<SocketIOComponent> ();
+		socketIO.On ("globalupdate", OnGlobalUpdateEvent);
 	}
 	
 	// Update is called once per frame
@@ -46,6 +51,22 @@ public class RelationshipListScript : MonoBehaviour {
 		}
 		relationshipsList = null;
 
+	}
+
+	public void OnGlobalUpdateEvent(SocketIOEvent e) {
+		GetNodeInforServerRequestScript getNodeInforServerRequestScript = serverRequest.GetComponent<GetNodeInforServerRequestScript> ();
+		getNodeInforServerRequestScript.nodeInformationRequest (DataHandler.SelectedNrds.node._id, onNodeClickCallback);
+	}
+
+
+	public void onNodeClickCallback(NodeRelationshipDataSet nrds)
+	{
+		// za ovo napravi u DataHandler script jedan Node(singleton moze) koji ce da cuva selektovani Node i
+		// i sve info za njega
+
+		DataHandler.SelectedNrds=nrds;
+		clearRelationshipsList ();
+		populateRelationshipList ();
 	}
 
 }

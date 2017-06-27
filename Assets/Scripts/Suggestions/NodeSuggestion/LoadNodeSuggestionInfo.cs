@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SocketIO;
 
 public class LoadNodeSuggestionInfo : MonoBehaviour {
 	public Text name;
@@ -13,11 +14,17 @@ public class LoadNodeSuggestionInfo : MonoBehaviour {
 	public Text nodeTypes;
 	public Button voteForButton;
 	public Button voteAgainstButton;
+	SocketIOComponent socketIO;
+	public GameObject serverRequest;
+	GetNodeSuggestionRequest serverRequestScript;
+	bool toListen = true;
 
 	// Use this for initialization
 	void Start()
 	{
-
+		socketIO = GameObject.Find ("SocketIO").GetComponent<SocketIOComponent>();
+		toListen = true;
+		//socketIO.On ("nodesuggestion-" + DataHandler.SelectedNodeSuggestion._id, NodeSuggestionEvent);
 	}
 
 	// Update is called once per frame
@@ -28,6 +35,12 @@ public class LoadNodeSuggestionInfo : MonoBehaviour {
 
 	public void populateFields()
 	{
+		Debug.Log (DataHandler.SelectedNodeSuggestion._id);
+		if (toListen) {
+			Debug.Log ("nodesuggestion-" + DataHandler.SelectedNodeSuggestion._id);
+			socketIO.On ("nodesuggestion-" + DataHandler.SelectedNodeSuggestion._id, NodeSuggestionEvent);
+			toListen = false;
+		}
 		name.text = DataHandler.SelectedNodeSuggestion.name;
 		suggType.text = DataHandler.SelectedNodeSuggestion.suggestion_type;
 		votesFor.text = DataHandler.SelectedNodeSuggestion.votes_for.Count.ToString();
@@ -42,5 +55,17 @@ public class LoadNodeSuggestionInfo : MonoBehaviour {
 				nodeTypes.text += ", " + DataHandler.SelectedNodeSuggestion.types[i];
 			}
 		}
+	}
+
+	public void NodeSuggestionEvent(SocketIOEvent socketIOEvent) {
+		Debug.Log ("Ovde se desavaju lepe stvari");
+		serverRequestScript = serverRequest.GetComponent<GetNodeSuggestionRequest> ();
+		serverRequestScript.nodekSuggestionsRequest (DataHandler.SelectedNodeSuggestion._id, nodeSuggestionReqCallback);
+	}
+
+	public void nodeSuggestionReqCallback(NodeSuggestion ns) {
+		Debug.Log ("Upao u callback");
+		DataHandler.SelectedNodeSuggestion = ns;
+		populateFields ();
 	}
 }
