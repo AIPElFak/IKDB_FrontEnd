@@ -38,6 +38,7 @@ public class LoadNodeInfoScene : MonoBehaviour {
 		panelHolder.GetComponent<NodeInfoPanelHolderScript> ().nodeInfoPanel.SetActive (true);
 		panelHolder.GetComponent<NodeInfoPanelHolderScript> ().addRelationshipPanel.SetActive (false);
 		RelationshipListScript relationshipLisScript = listController.GetComponent<RelationshipListScript> ();
+		relationshipLisScript.clearRelationshipsList ();
 		relationshipLisScript.populateRelationshipList ();
 		//CreateScrollList createSL = scrollListController.GetComponent<CreateScrollList>();
 		//createSL.relationshipsList = relatioships;

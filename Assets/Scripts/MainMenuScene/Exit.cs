@@ -13,4 +13,9 @@ public class Exit : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	public void onClick()
+	{
+		Application.Quit ();
+	}
 }

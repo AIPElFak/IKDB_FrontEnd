@@ -21,9 +21,9 @@ public class SeeNodeInfo : MonoBehaviour {
 	public void onClick()
 	{
 		serverRequester = GameObject.Find("GraphicsSceneServerRequster");
-		Debug.Log ("see node info");
-		//getNodeByNameServerRequest = serverRequester.GetComponent<GetNodeByNameServerRequest> ();
-		//getNodeByNameServerRequest.nodeInformationRequest (DataHandler.GraphicSceneSelectedNode, onNodeClickCallback);
+		//Debug.Log ("see node info");
+		getNodeByNameServerRequest = serverRequester.GetComponent<GetNodeByNameServerRequest> ();
+		getNodeByNameServerRequest.nodeInformationRequest (DataHandler.GraphicSceneSelectedNode, onNodeClickCallback);
 	}
 
 	public void onNodeClickCallback(NodeRelationshipDataSet nrds)

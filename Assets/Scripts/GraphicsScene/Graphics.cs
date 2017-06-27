@@ -41,7 +41,10 @@ public class Graphics : MonoBehaviour {
 				float circleY = largeCircleR * Mathf.Sin (offset + 2 * Mathf.PI * i / toDrawHere);
 				s = Instantiate(sphere) as GameObject;
 				SphereScript nodeSphereScript = s.GetComponent<SphereScript> ();
-				nodeSphereScript.textHolder.GetComponent<TextMesh> ().text = DataHandler.SelectedNrds.relationships[circlesDone].end_name;
+				if(!DataHandler.SelectedNrds.relationships[circlesDone].end_name.Equals(DataHandler.SelectedNrds.node.name))
+					nodeSphereScript.textHolder.GetComponent<TextMesh> ().text = DataHandler.SelectedNrds.relationships[circlesDone].end_name;
+				else
+					nodeSphereScript.textHolder.GetComponent<TextMesh> ().text = DataHandler.SelectedNrds.relationships[circlesDone].start_name;
 				v3End = new Vector3 (circleX,circleY,4*level);
 				s.transform.position = v3End;
 				//Gizmos.color = Color.blue;
