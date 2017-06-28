@@ -19,7 +19,7 @@ public class CloseLinkSuggestionInfo : MonoBehaviour {
 
 	public void onClick() {
 		script = panelHolder.GetComponent<SuggestionsScenePanelHolderScript> ();
-		script.nodeSuggestionInfoPanel.SetActive (false);
+		script.linkSuggestionInfoPanel.SetActive (false);
 		script.suggestionsPanel.SetActive (true);
 		script.listWithSuggestionsPanel.SetActive (true);
 	}
