@@ -22,7 +22,6 @@ public class EditNodeScript : MonoBehaviour {
 
 	void Start () 
 	{
-		Debug.Log ("Krk");
 		inputFieldNodeInformation.gameObject.SetActive(false);
 		inputFieldNodeDescription.gameObject.SetActive(false);
 		saveChanges.gameObject.SetActive(false);

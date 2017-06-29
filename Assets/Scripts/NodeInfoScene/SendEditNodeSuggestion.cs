@@ -24,21 +24,24 @@ public class SendEditNodeSuggestion : MonoBehaviour {
 	}
 	public void onSendClick()
 	{
+		serverRequestScript = serverReq.GetComponent<EditNodeSuggestionRequestScript> ();
 		string definition = null, description = null; 
-		if(!definitionInputField.text.Equals(DataHandler.SelectedNrds.node.definition))
-		{
+		if (!definitionInputField.text.Equals (DataHandler.SelectedNrds.node.definition)) {
 			definition = definitionInputField.text;
+		} else {
+			definition = DataHandler.SelectedNrds.node.definition;
 		}
-		if(!descriptionInputField.text.Equals(DataHandler.SelectedNrds.node.description))
-		{
+		if (!descriptionInputField.text.Equals (DataHandler.SelectedNrds.node.description)) {
 			description = descriptionInputField.text;
+		} else {
+			description = DataHandler.SelectedNrds.node.description;
 		}
 		List<string> list = new List<string>();
 		for (int i = 0; i < typesDropdown.options.Count;i++)
 		{
 			list.Add(typesDropdown.options[i].text);
 		}
-		serverRequestScript.editNodeSuggestionRequest(node_id, definition, description, list, onSendClickCallback);
+		serverRequestScript.editNodeSuggestionRequest(DataHandler.SelectedNrds.node._id, definition, description, list, onSendClickCallback);
 	}
 	public void onSendClickCallback(String error)
 	{

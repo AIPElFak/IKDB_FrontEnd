@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class CreateUserScript : MonoBehaviour {
 
@@ -36,14 +38,18 @@ public class CreateUserScript : MonoBehaviour {
 		
 		if (s != null)
 		{
+			#if UNITY_EDITOR
 			EditorUtility.DisplayDialog("Error", "An error occurred", "Ok");
+			#endif
 		}
 		else
 		{
+			#if UNITY_EDITOR
 			panelHolderScript = panelHolder.GetComponent<PanelHolderScript> ();
 			EditorUtility.DisplayDialog("Success", "Successfully created user account. Check your email to verify", "Ok");
 			panelHolderScript.signupPanel.SetActive (false);
 			panelHolderScript.loginPanel.SetActive (true);
+			#endif
 		}
 	}
 }
