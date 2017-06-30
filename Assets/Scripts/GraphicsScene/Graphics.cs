@@ -54,7 +54,7 @@ public class Graphics : MonoBehaviour {
 
 	public void Draw() {
 		
-
+		Debug.Log ("draw");
 		//GameObject mainNode = GameObject.CreatePrimitive (PrimitiveType.Sphere);
 		GameObject mainNode = Instantiate(sphere) as GameObject;
 		SphereScript mainSphereScript = mainNode.GetComponent<SphereScript> ();
@@ -118,8 +118,12 @@ public class Graphics : MonoBehaviour {
 	}
 
 	public void clearScene() {
+		Debug.Log ("clear scene");
+
 		GameObject[] objects = GameObject.FindObjectsOfType<GameObject> ();
 		foreach (GameObject o in objects) {
+			Debug.Log (o.transform.name);
+			if(o.transform.name.Equals("Sphere(Clone)") || o.transform.name.Equals("New Game Object"))
 			Destroy (o);
 		}
 	}
