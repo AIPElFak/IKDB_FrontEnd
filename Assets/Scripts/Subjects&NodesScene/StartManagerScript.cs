@@ -17,8 +17,8 @@ public class StartManagerScript : MonoBehaviour {
 		subjectsScrollList.PopulateSubjectsList ();
 		//panelHolderScript = panelHolder.GetComponent<PanelHolderScript2> ();
 		//panelHolderScript.nodesPanel.SetActive (false);
-		deleteCategoryButton.gameObject.SetActive (true);
-		addCategoryButton.gameObject.SetActive (true);
+//		deleteCategoryButton.gameObject.SetActive (true);
+//		addCategoryButton.gameObject.SetActive (true);
 		if (DataHandler.SelectedSubjects.Count > 0) {
 			deleteCategoryButton.gameObject.SetActive (false);
 			addCategoryButton.gameObject.SetActive (false);

@@ -52,7 +52,7 @@ public class SearchByCategoriesScript : MonoBehaviour {
 		createScrollList.nodeList = array;
 		createScrollList.populateNodeList();
 
-		deleteCategoryButton.gameObject.SetActive (false);
-		addCategoryButton.gameObject.SetActive (false);
+//		deleteCategoryButton.gameObject.SetActive (false);
+//		addCategoryButton.gameObject.SetActive (false);
 	}
 }
